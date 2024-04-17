@@ -1,0 +1,28 @@
+name: Daily Code Execution
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs every day at midnight
+
+jobs:
+  execute_code:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5 # Your script takes 5 minutes to execute
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x' # Specify your Python version here
+
+      - name: Install dependencies
+        run: | 
+            pip install -r requirements.txt
+
+      - name: Execute Python script
+        run: |
+          python script.py
+          
