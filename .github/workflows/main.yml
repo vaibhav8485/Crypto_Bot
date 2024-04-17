@@ -1,4 +1,4 @@
-name: Crypto Bot Alert
+name: Crypto Bot
 
 on:
   schedule:
