@@ -1,4 +1,4 @@
-name: Daily Code Execution
+name: Crypto Bot Alert
 
 on:
   schedule:
@@ -25,4 +25,3 @@ jobs:
       - name: Execute Python script
         run: |
           python script.py
-          
