@@ -1,6 +1,6 @@
 # IMP STD Modules
 import numpy as np
-import talib
+
 
 def MACD(df, symbol_name, signal_input, short_macd, long_macd):
 
@@ -49,26 +49,24 @@ def MACD(df, symbol_name, signal_input, short_macd, long_macd):
         print(f"An unexpected error occurred in MACD Indicator : {e}")
 
 
-# RSI Indicator
 def RSI(df, symbol_name, rsi_period, below_line, above_line):
-
-    """
-    Calculate RSI and generate buy/sell signals based on specified thresholds.
-
-    Parameters:
-    - df (DataFrame): Input DataFrame containing historical prices.
-    - close_column (str): Column name for closing prices.
-    - rsi_period (int): RSI calculation period.
-    - below_line (float): Threshold for RSI to generate a buy signal.
-    - above_line (float): Threshold for RSI to generate a sell signal.
-
-    Returns:
-    RSI DATA.
-    """
-    
     try:
+        # Calculate price change
+        df['price_change'] = df['close'].diff()
+
+        # Calculate gains and losses
+        df['gain'] = df['price_change'].apply(lambda x: x if x > 0 else 0)
+        df['loss'] = df['price_change'].apply(lambda x: abs(x) if x < 0 else 0)
+
+        # Smooth the average gains and losses using Exponential Moving Average (EMA)
+        df['avg_gain'] = df['gain'].ewm(span=rsi_period, min_periods=rsi_period).mean()
+        df['avg_loss'] = df['loss'].ewm(span=rsi_period, min_periods=rsi_period).mean()
+
+        # Calculate relative strength (RS)
+        df['rs'] = df['avg_gain'] / df['avg_loss']
+
         # Calculate RSI
-        df['rsi'] = talib.RSI(df['close'], timeperiod = rsi_period)
+        df['rsi'] = 100 - (100 / (1 + df['rs']))
 
         # Create a signal column based on RSI conditions
         df['signal'] = 'Neutral'  # Default value for "No Action"
@@ -79,16 +77,12 @@ def RSI(df, symbol_name, rsi_period, below_line, above_line):
         # Sell signal: RSI crosses above 'above_line'
         df.loc[df['rsi'] >= above_line, 'signal'] = 'Overbought' 
 
-        # Download Dataset in CSV formate
-        # file_name = f'....PATH....{symbol_name}.csv'
-        # df.to_csv(file_name) 
+        # Extract the last signal and RSI value
+        signal = df['signal'].iloc[-1]
+        signal_line = df['rsi'].iloc[-1]
 
+        print(f'coin name: {symbol_name}, RSI signal: {signal} and RSI signal value: {signal_line}')
 
-        signal = df['signal'].iloc[-1] # RSI Signal
-        signal_line = df['rsi'].iloc[-1] # RSI Signal Line
-
-
-        # Return RSI Data
         return signal, signal_line
 
     except Exception as e:
