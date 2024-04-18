@@ -48,7 +48,7 @@ def send_alert(action, coin_name, current_price, m1, m2, r1, r2, p1, p2, s1, s2)
     # Create a multipart message
     msg = MIMEMultipart()
     msg['From'] = SENDER
-    msg['To'] = RECIVER
+    msg['To'] = RECEIVER
     msg['Subject'] = 'Crypto Alert!'
 
     # Attach the message to the email
@@ -60,7 +60,7 @@ def send_alert(action, coin_name, current_price, m1, m2, r1, r2, p1, p2, s1, s2)
         server.login(SENDER, PASSWORD)
         
         # Send the email
-        server.sendmail(SENDER, RECIVER, msg.as_string())
+        server.sendmail(SENDER, RECEIVER, msg.as_string())
         
         # Close the connection
         server.quit()
