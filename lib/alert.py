@@ -1,12 +1,22 @@
 # STD Modules
 import smtplib
+import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+
 # Email configuration
-EMAIL_ADDRESS = 'cryptobot8485@gmail.com' # Sender
-PASSWORD = 'otwx mqmy tuip ffly' # Sender's Password
-RECIPIENT = 'vaibhavumbarkar8485@gmail.com' # Receiver
+# SENDER = 'cryptobot8485@gmail.com' # Sender
+SENDER = os.environ.get('SENDER_MAIL')
+
+# PASSWORD = 'otwx mqmy tuip ffly' # Sender's Password
+PASSWORD = os.environ.get('SENDER_PASS')
+
+
+# RECIVER = 'vaibhavumbarkar8485@gmail.com' # Receiver
+RECEIVER = os.environ.get('RECEIVER_MAIL')
+
+
 
 def send_alert(action, coin_name, current_price, m1, m2, r1, r2, p1, p2, s1, s2):
     message = f"""
@@ -37,8 +47,8 @@ def send_alert(action, coin_name, current_price, m1, m2, r1, r2, p1, p2, s1, s2)
 
     # Create a multipart message
     msg = MIMEMultipart()
-    msg['From'] = EMAIL_ADDRESS
-    msg['To'] = RECIPIENT
+    msg['From'] = SENDER
+    msg['To'] = RECIVER
     msg['Subject'] = 'Crypto Alert!'
 
     # Attach the message to the email
@@ -47,10 +57,10 @@ def send_alert(action, coin_name, current_price, m1, m2, r1, r2, p1, p2, s1, s2)
     try:
         # Connect to Gmail's SMTP server
         server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
-        server.login(EMAIL_ADDRESS, PASSWORD)
+        server.login(SENDER, PASSWORD)
         
         # Send the email
-        server.sendmail(EMAIL_ADDRESS, RECIPIENT, msg.as_string())
+        server.sendmail(SENDER, RECIVER, msg.as_string())
         
         # Close the connection
         server.quit()

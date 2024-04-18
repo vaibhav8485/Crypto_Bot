@@ -23,5 +23,9 @@ jobs:
             pip install -r requirements.txt
 
       - name: Execute Python script
+        env:
+          SENDER_MAIL: ${{ secrets.SENDER_MAIL }}
+          SENDER_PASS: ${{ secrets.SENDER_PASS }}
+          RECEIVER_MAIL: ${{ secrets.RECEIVER_MAIL }}
         run: |
           python script.py
