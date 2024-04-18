@@ -81,8 +81,6 @@ def RSI(df, symbol_name, rsi_period, below_line, above_line):
         signal = df['signal'].iloc[-1]
         signal_line = df['rsi'].iloc[-1]
 
-        print(f'coin name: {symbol_name}, RSI signal: {signal} and RSI signal value: {signal_line}')
-
         return signal, signal_line
 
     except Exception as e:
