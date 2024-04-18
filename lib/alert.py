@@ -6,14 +6,8 @@ from email.mime.text import MIMEText
 
 
 # Email configuration
-# SENDER = 'cryptobot8485@gmail.com' # Sender
 SENDER = os.environ.get('SENDER_MAIL')
-
-# PASSWORD = 'otwx mqmy tuip ffly' # Sender's Password
 PASSWORD = os.environ.get('SENDER_PASS')
-
-
-# RECIVER = 'vaibhavumbarkar8485@gmail.com' # Receiver
 RECEIVER = os.environ.get('RECEIVER_MAIL')
 
 
