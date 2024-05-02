@@ -1,90 +1,163 @@
 # User Define Modules
-from lib.indicator import MACD, RSI, PRICE_MOMENTUM, SO # (Technical Indicator)
+from lib.indicators import Momentum_Indicators, Trend_Indicators, Volatility_Indicators, Volume_Indicators
 from lib.alert import send_alert
 
-# Parameters for MACD Indicator
-signal_input = 9
-macd_short_period = 12
-macd_long_period = 26
-
-# Parameters for RSI Indicator
-rsi_period = 14
-below_line = 30
-above_line = 60
-
-# Parameters for Price Momentum Indicator (PPO)
-period = 7
-
-# Parameters for Stochastic Oscillator Indicator (SO)
-k_period = 14
-d_period = 1
-
-# Get Signal
-def get_signal(df, symbol_name, current_price):
-
+def get_signal(df, coin_name, coin_price):
     try:
-        # MACD
-        macd_signal, macd_signal_line = MACD(df, symbol_name, signal_input, macd_short_period, macd_long_period)
+        # Initialize indicator classes
+        momentum = Momentum_Indicators(df)
+        trend = Trend_Indicators(df)
+        volatility = Volatility_Indicators(df)
+        volume = Volume_Indicators(df)
         
-        # RSI
-        rsi_signal, rsi_signal_line = RSI(df, symbol_name, rsi_period, below_line, above_line)
-
-        # Price Percentage Oscillator (PPO)
-        ppo_signal, ppo_value = PRICE_MOMENTUM(df, symbol_name, period)
-
-        # Stochastic Oscillator (SO)
-        so_signal, k_value = SO(df, k_period, d_period)
-
-        # Final Result / Action
+        # Initialize counts
         buy_count = 0
         sell_count = 0
         hold_count = 0
-        
-        # MACD 
-        if macd_signal == 'UpTrend' and macd_signal_line < 0:
-            buy_count += 1
-        elif macd_signal == 'DownTrend' and macd_signal_line > 0:
-            sell_count += 1
-        else:
-            hold_count += 1
+        imp_buy_count = 0
+        imp_sell_count = 0
+        imp_hold_count = 0
 
-        # RSI
-        if rsi_signal == 'Oversold' and rsi_signal_line <= 30:
-            buy_count += 1
-        elif rsi_signal == 'Overbought' and rsi_signal_line >= 60:
-            sell_count += 1
-        else:
-            hold_count += 1    
+        # Get signals and probabilities
+        # Momentum
+        rsi_signal, rsi_p = momentum.rsi()
+        roc_signal, roc_p = momentum.roc()
+        so_signal, so_p = momentum.so()
+        macd_signal, macd_zero_line, macd_p = momentum.macd()
+        # Trend
+        aroon_signal, aroon_p = trend.aroon() 
+        ema_signal, ema_p = trend.ema()
+        wma_signal, wma_p = trend.wma()
+        sma_signal, sma_p = trend.sma()
+        # Volatility
+        bb_signal, bb_p = volatility.bb()
+        adx_signal, adx_p = volatility.adx()
+        kc_signal, kc_p = volatility.kc()
+        dc_signal, dc_p = volatility.dc()
+        # Volume
+        obv_signal, obv_p = volume.obv()
+        cmf_signal, cmf_p = volume.cmf()
+        eom_signal, eom_p = volume.eom()
+        mfi_signal, mfi_p = volume.mfi()
 
-        # PPO
-        if ppo_signal == 'Oversold' and ppo_value < 0: 
-            buy_count += 1
-        elif ppo_signal == 'Overbought' and ppo_value > 0:
-            sell_count += 1
-        else:
-            hold_count += 1
+        # Aggregate counts
+        # Momentum
+        buy_count += rsi_p if rsi_signal == 1 else 0
+        sell_count += rsi_p if rsi_signal == 0 else 0
+        hold_count += rsi_p if rsi_signal == 'NA' else 0
 
-        # SO
-        if so_signal == 'Oversold' and k_value <= 20:
-            buy_count += 1
-        elif so_signal == 'Overbought' and k_value >= 80: 
-            sell_count += 1
-        else:
-            hold_count += 1
+        # Imp Indicators
+        imp_buy_count += rsi_p if rsi_signal == 1 else 0
+        imp_sell_count += rsi_p if rsi_signal == 0 else 0
+        imp_hold_count += rsi_p if rsi_signal == 'NA' else 0
 
-        # Action
+        buy_count += roc_p if roc_signal == 1 else 0
+        sell_count += roc_p if roc_signal == 0 else 0
+
+        buy_count += so_p if so_signal == 1 else 0
+        sell_count += so_p if so_signal == 0 else 0
+        hold_count += so_p if so_signal == 'NA' else 0
+
+        # Imp Indicators
+        imp_buy_count += so_p if so_signal == 1 else 0
+        imp_sell_count += so_p if so_signal == 0 else 0
+        imp_hold_count += so_p if so_signal == 'NA' else 0
+
+        buy_count += macd_p if macd_signal == 1 and macd_zero_line == 1 else 0
+        sell_count += macd_p if macd_signal == 0 and macd_zero_line == 0 else 0
+        buy_count += macd_p if macd_signal == 1 and macd_zero_line == 0 else 0
+        sell_count += macd_p if macd_signal == 0 and macd_zero_line == 1 else 0
+
+        # Imp Indicators
+        imp_buy_count += macd_p if macd_signal == 1 and macd_zero_line == 1 else 0
+        imp_sell_count += macd_p if macd_signal == 0 and macd_zero_line == 0 else 0
+        imp_buy_count += macd_p if macd_signal == 1 and macd_zero_line == 0 else 0
+        imp_sell_count += macd_p if macd_signal == 0 and macd_zero_line == 1 else 0
+
+        # Trend
+        buy_count += aroon_p if aroon_signal == 1 else 0
+        sell_count += aroon_p if aroon_signal == 0 else 0
+        hold_count += aroon_p if aroon_signal == 'NA' else 0
+
+        # Imp Indicators
+        imp_buy_count += aroon_p if aroon_signal == 1 else 0
+        imp_sell_count += aroon_p if aroon_signal == 0 else 0
+        imp_hold_count += aroon_p if aroon_signal == 'NA' else 0
+
+        buy_count += ema_p if ema_signal == 1 else 0
+        sell_count += ema_p if ema_signal == 0 else 0
+
+        buy_count += wma_p if wma_signal == 1 else 0
+        sell_count += wma_p if wma_signal == 0 else 0
+
+        buy_count += sma_p if sma_signal == 1 else 0
+        sell_count += sma_p if sma_signal == 0 else 0
+
+        # Volatility
+        buy_count += bb_p if bb_signal == 1 else 0
+        sell_count += bb_p if bb_signal == 0 else 0
+        hold_count += bb_p if bb_signal == 'NA' else 0
+
+        # Imp Indicators
+        imp_buy_count += bb_p if bb_signal == 1 else 0
+        imp_sell_count += bb_p if bb_signal == 0 else 0
+        imp_hold_count += bb_p if bb_signal == 'NA' else 0
+
+        buy_count += adx_p if adx_signal == 1 else 0
+        sell_count += adx_p if adx_signal == 0 else 0
+
+        buy_count += kc_p if kc_signal == 1 else 0
+        sell_count += kc_p if kc_signal == 0 else 0
+        hold_count += kc_p if kc_signal == 'NA' else 0
+
+        buy_count += dc_p if dc_signal == 1 else 0
+        sell_count += dc_p if dc_signal == 0 else 0
+        hold_count += dc_p if dc_signal == 'NA' else 0
+
+        # Volume
+        buy_count += obv_p if obv_signal == 1 else 0
+        sell_count += obv_p if obv_signal == 0 else 0
+        hold_count += obv_p if obv_signal == 'NA' else 0
+
+        buy_count += cmf_p if cmf_signal == 1 else 0
+        sell_count += cmf_p if cmf_signal == 0 else 0
+        hold_count += cmf_p if cmf_signal == 'NA' else 0
+
+        buy_count += eom_p if eom_signal == 1 else 0
+        sell_count += eom_p if eom_signal == 0 else 0
+        hold_count += eom_p if eom_signal == 'NA' else 0
+
+        buy_count += mfi_p if mfi_signal == 1 else 0
+        sell_count += mfi_p if mfi_signal == 0 else 0
+        hold_count += mfi_p if mfi_signal == 'NA' else 0
+
+        # Determine action IMP indicators
+        if imp_buy_count > imp_sell_count and imp_buy_count > imp_hold_count:
+            imp_indicators = 1
+        elif imp_sell_count > imp_buy_count and imp_sell_count > imp_hold_count:
+            imp_indicators = 0
+        else:
+            imp_indicators = 'NA'
+
+        # Determine action all indicators
         if buy_count > sell_count and buy_count > hold_count:
-            final_result = 'Buy'
+            all_indicators = 1
         elif sell_count > buy_count and sell_count > hold_count:
+            all_indicators = 0
+        else:
+            all_indicators = 'NA'
+
+        # Determine action for Final Result
+        if all_indicators == 1 and imp_indicators == 1:
+            final_result = 'Buy'
+        elif all_indicators == 0 and imp_indicators == 0:
             final_result = 'Sell'
         else:
             final_result = 'Hold'
 
-        # Send Alert
         if final_result != 'Hold':
-            send_alert(str(final_result), str(symbol_name), str(current_price), str(macd_signal), str(macd_signal_line), str(rsi_signal), str(rsi_signal_line), str(ppo_signal), str(ppo_value), str(so_signal), str(k_value))
-
+            # Send Signal
+            send_alert(final_result, coin_name, coin_price)
 
     except Exception as e:
         print(f"An unexpected error occurred in Signal Section: {e}")
-    

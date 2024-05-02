@@ -4,46 +4,24 @@ import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-
 # Email configuration
 SENDER = os.environ.get('SENDER_MAIL')
 PASSWORD = os.environ.get('SENDER_PASS')
 RECEIVER = os.environ.get('RECEIVER_MAIL')
 
 
-
-def send_alert(action, coin_name, current_price, m1, m2, r1, r2, p1, p2, s1, s2):
+def send_alert(action, coin_name, coin_price):
     message = f"""
     Crypto Bot :
-
-    - Action : {action}
+    - Order Action : {action}
     - Coin Name : {coin_name}
-    - Price : {current_price}
-    
-
-    Advance Information :
-
-    - MACD Signal : {m1}
-    - MACD Value (+/-) : {m2}
-
-    - RSI Signal : {r1}
-    - RSI Value (60/30) : {r2}
-
-    - Price Percentage Oscillator : {p1}
-    - Price Percentage Oscillator (+/-) : {p2}
-
-    - Stochastic Oscillator : {s1}
-    - Stochastic Oscillator (80/20) : {s2}
-
-    (NOTE : Timeframe: 1w for above information)
-
+    - Current Price : {coin_price}
     """
-
     # Create a multipart message
     msg = MIMEMultipart()
     msg['From'] = SENDER
     msg['To'] = RECEIVER
-    msg['Subject'] = 'Crypto Alert!'
+    msg['Subject'] = f'{action} Alert'
 
     # Attach the message to the email
     msg.attach(MIMEText(message, 'plain'))
@@ -58,6 +36,7 @@ def send_alert(action, coin_name, current_price, m1, m2, r1, r2, p1, p2, s1, s2)
         
         # Close the connection
         server.quit()
-        print(f'Crypto Bot: {action} Alert Send Successfully.')
+        print(f'{coin_name} {action} Alert Send Successfully.')
+
     except Exception as e:
         print(f'Failed to send Alert. Error: {str(e)}')
