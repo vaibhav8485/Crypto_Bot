@@ -9,7 +9,6 @@ SENDER = os.environ.get('SENDER_MAIL')
 PASSWORD = os.environ.get('SENDER_PASS')
 RECEIVER = os.environ.get('RECEIVER_MAIL')
 
-
 def send_alert(action, coin_name, coin_price):
     message = f"""
     Crypto Bot :

@@ -1,7 +1,6 @@
 import ta
 import numpy as np
 
-
 class Momentum_Indicators:
     def __init__(self, df):
         self.df = df
