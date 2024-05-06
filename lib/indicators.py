@@ -20,7 +20,7 @@ class Momentum_Indicators:
             self.df.loc[self.df['rsi'] <= threshold_low, 'signal'] = 1
 
             # Set priority
-            p = 4
+            p = 5
 
             return self.df['signal'].iloc[-1], p
         
@@ -88,7 +88,7 @@ class Momentum_Indicators:
             self.df.loc[(self.df['macd_line'] < 0) & (self.df['macd_signal'] < 0), 'zero_line'] = 1
 
             # Set priority
-            p = 4
+            p = 5
 
             return self.df['signal'].iloc[-1], self.df['zero_line'].iloc[-1], p
         
