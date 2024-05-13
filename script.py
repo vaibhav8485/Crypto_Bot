@@ -17,14 +17,14 @@ def CRYPTO_BOT():
             df_1w, _, _ = get_data(asset, '1w', 1000)
 
             # Get Daily df Conclusion
-            result_1d = get_signal(df_1d)
-            result_1w = get_signal(df_1w)
+            result_1d, b1_1d, s1_1d, h1_1d, b2_1d, s2_1d, h2_1d = get_signal(df_1d)
+            result_1w, b1_1w, s1_1w, h1_1w, b2_1w, s2_1w, h2_1w = get_signal(df_1w)
 
             # Cal Final Result
             if result_1d == 1 and result_1w == 1:
-                send_alert('Buy', coin, price)
+                send_alert('Buy', coin, price, result_1d, result_1w, b1_1d, b2_1d, b1_1w, b2_1w, h1_1d, h2_1d, h1_1w, h2_1w)
             elif result_1d == 0 and result_1w == 0:
-                send_alert('Sell', coin, price)
+                send_alert('Sell', coin, price, result_1d, result_1w, s1_1d, s2_1d, s1_1w, s2_1w, h1_1d, h2_1d, h1_1w, h2_1w)
 
         print("[End]")
     except Exception as e:

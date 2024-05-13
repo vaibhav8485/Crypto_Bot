@@ -155,7 +155,7 @@ def get_signal(df):
             final_result = 'NA'
 
         # Return Final Result
-        return final_result  # 1 Buy, 0 Sell and 'NA' Hold
+        return final_result, buy_count, sell_count, hold_count, imp_buy_count, imp_sell_count, imp_hold_count  # 1 Buy, 0 Sell and 'NA' Hold & Other Signals and Scores
 
     except Exception as e:
         print(f"An unexpected error occurred in Signal Section: {e}")
