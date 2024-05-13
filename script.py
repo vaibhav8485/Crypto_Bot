@@ -16,7 +16,7 @@ def CRYPTO_BOT():
             df_1d, coin, price = get_data(asset, '1d', 1000)
             df_1w, _, _ = get_data(asset, '1w', 1000)
 
-            # Get Daily df Conclusion
+            # Get Conclusion
             result_1d, b1_1d, s1_1d, h1_1d, b2_1d, s2_1d, h2_1d = get_signal(df_1d)
             result_1w, b1_1w, s1_1w, h1_1w, b2_1w, s2_1w, h2_1w = get_signal(df_1w)
 
