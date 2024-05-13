@@ -1,8 +1,7 @@
 # User Define Modules
 from lib.indicators import Momentum_Indicators, Trend_Indicators, Volatility_Indicators, Volume_Indicators
-from lib.alert import send_alert
 
-def get_signal(df, coin_name, coin_price):
+def get_signal(df):
     try:
         # Initialize indicator classes
         momentum = Momentum_Indicators(df)
@@ -149,15 +148,14 @@ def get_signal(df, coin_name, coin_price):
 
         # Determine action for Final Result
         if all_indicators == 1 and imp_indicators == 1:
-            final_result = 'Buy'
+            final_result = 1
         elif all_indicators == 0 and imp_indicators == 0:
-            final_result = 'Sell'
+            final_result = 0
         else:
-            final_result = 'Hold'
+            final_result = 'NA'
 
-        if final_result != 'Hold':
-            # Send Signal
-            send_alert(final_result, coin_name, coin_price)
+        # Return Final Result
+        return final_result  # 1 Buy, 0 Sell and 'NA' Hold
 
     except Exception as e:
         print(f"An unexpected error occurred in Signal Section: {e}")

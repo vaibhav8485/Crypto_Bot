@@ -9,18 +9,22 @@ SENDER = os.environ.get('SENDER_MAIL')
 PASSWORD = os.environ.get('SENDER_PASS')
 RECEIVER = os.environ.get('RECEIVER_MAIL')
 
-def send_alert(action, coin_name, coin_price):
+def send_alert(action, coin, price):
     message = f"""
     Crypto Bot :
     - Order Action : {action}
-    - Coin Name : {coin_name}
-    - Current Price : {coin_price}
+    - Coin Name : {coin}
+    - Current Price : {price}
+    
+    Details :
+    - Daily Chart Analysis : 
+    - Weekly Chart Analysis :
     """
     # Create a multipart message
     msg = MIMEMultipart()
     msg['From'] = SENDER
     msg['To'] = RECEIVER
-    msg['Subject'] = f'{action} Alert'
+    msg['Subject'] = f'{coin} {action} Alert'
 
     # Attach the message to the email
     msg.attach(MIMEText(message, 'plain'))

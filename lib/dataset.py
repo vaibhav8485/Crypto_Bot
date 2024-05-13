@@ -12,7 +12,6 @@ def get_data(symbol, timeframe, limit):
         data = exchange.fetch_ohlcv(symbol, timeframe, limit=limit)
         
         ticker = exchange.fetch_ticker(symbol)
-        
         price = ticker['last']
         
         df = pd.DataFrame(data, columns=['timestamp', 'open', 'high', 'low', 'close', 'volume'])
@@ -20,10 +19,10 @@ def get_data(symbol, timeframe, limit):
         df.set_index('timestamp', inplace=True)
 
         # Get Coin Name
-        coin_name = symbol.split('/')[0]
+        coin = symbol.split('/')[0]
 
         # Return
-        return df, coin_name, price
+        return df, coin, price
     
     except Exception as e:
-        print(f"An unexpected error occurred in Dataset Section: {e}")
+        print(f"An unexpected error occurred in Day Dataset Section: {e}")
