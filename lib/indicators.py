@@ -1,7 +1,7 @@
 import ta
 import numpy as np
 
-
+# Momentum Indicators
 class Momentum_Indicators:
     def __init__(self, df):
         self.df = df
@@ -97,6 +97,7 @@ class Momentum_Indicators:
             print(f"An error occurred in MACD calculation: {e}")
 
 
+# Trend Indicators
 class Trend_Indicators:
     def __init__(self, df):
         self.df = df
@@ -167,6 +168,7 @@ class Trend_Indicators:
             print(f"An error occurred in SMA calculation: {e}")
 
 
+# Volatility Indicators
 class Volatility_Indicators:
     def __init__(self, df):
         self.df = df
@@ -254,6 +256,7 @@ class Volatility_Indicators:
             print(f"An error occurred in Donchian Channel calculation: {e}")
 
 
+# Volume Indicators
 class Volume_Indicators:
     def __init__(self, df):
         self.df = df
