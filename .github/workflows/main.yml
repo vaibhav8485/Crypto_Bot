@@ -2,7 +2,7 @@ name: Crypto Bot
 
 on:
   schedule:
-    - cron: '30 0 * * *'
+    - cron: '0 6 * * *'
 
 jobs:
   execute_code:
