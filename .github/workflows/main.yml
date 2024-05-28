@@ -12,23 +12,22 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-        with:
-          node-version: '20'
 
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.x'
-          node-version: '20'
 
       - name: Install Dependencies
-        run: | 
-            pip install -r requirements.txt
+        run: |
+          pip install -r requirements.txt
 
       - name: Execute Python script
         env:
           SENDER_MAIL: ${{ secrets.SENDER_MAIL }}
           SENDER_PASS: ${{ secrets.SENDER_PASS }}
           RECEIVER_MAIL: ${{ secrets.RECEIVER_MAIL }}
+          SECRETKEY: ${{ secrets.SECRETKEY }}
+          APIKEY: ${{ secrets.APIKEY }}
         run: |
           python script.py
