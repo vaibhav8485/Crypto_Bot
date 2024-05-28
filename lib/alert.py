@@ -73,10 +73,10 @@ def send_action_alert(action, coin, price, signal_1d, signal_1w, s1, s2, s3, s4,
 
         Details :
          - Daily Chart Signal : {signal_1d}, 
-                 - All Indicators : [ Sell: {s1}, Hold: {h1_1d} ] 
-                 - Imp Indicators : [ Sell: {s2}, Hold: {h2_1d} ]
+                 - All Indicators : [ Sell: {s1}, Hold: {h1_1d} ] / 44
+                 - Imp Indicators : [ Sell: {s2}, Hold: {h2_1d} ] / 21
         - Weekly Chart Signal : {signal_1w},
-                 - All Indicators : [ Sell: {s3}, Hold: {h1_1w} ] 
-                 - Imp Indicators : [ Sell: {s4}, Hold: {h2_1w} ]
+                 - All Indicators : [ Sell: {s3}, Hold: {h1_1w} ] / 44
+                 - Imp Indicators : [ Sell: {s4}, Hold: {h2_1w} ] / 21
         """      
     send_email('Alert!', message)
