@@ -43,17 +43,17 @@ def send_order_alert(action, coin, price, quantity, balance):
     - Quantity : {quantity}
     - Investment : {balance} INR
     """
-    send_email('Order placed', message)
+    send_email('Order placed successfully', message)
 
 def send_alert(message):
-    send_email('Error occurred!', message)
+    send_email('Order execution failed!', message)
 
 def send_action_alert(action, coin, price, signal_1d, signal_1w, s1, s2, s3, s4, h1_1d, h2_1d, h1_1w, h2_1w):
     if action == 'Buy':
         message = f"""
         Crypto Bot :
-        - Order Action : {action}
-        - Coin Name : {coin}
+        - Action : {action}
+        - Crypto Name : {coin}
         - Current Price : {price}
 
         Details :
@@ -67,8 +67,8 @@ def send_action_alert(action, coin, price, signal_1d, signal_1w, s1, s2, s3, s4,
     else:
         message = f"""
         Crypto Bot :
-        - Order Action : {action}
-        - Coin Name : {coin}
+        - Action : {action}
+        - Crypto Name : {coin}
         - Current Price : {price}
 
         Details :
