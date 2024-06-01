@@ -36,7 +36,7 @@ def place_order(side, symbol, price):
     coin_exists = find_coin(coin_name)  # Check the coin exists in portfolio or not
     
     if side == 'buy':
-        buy_quantity = 100 / price  # Calculate buy quantity (Note: Always invest 100 INR from portfolio balance)
+        buy_quantity = 110 / price  # Calculate buy quantity (Note: Always invest 100 INR from portfolio balance)
         if balance >= 110:
             payload = {
                 "side": side,
