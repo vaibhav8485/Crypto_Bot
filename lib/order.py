@@ -38,6 +38,7 @@ def place_order(side, symbol, price):
     if side == 'buy':
         buy_q = 130 / price  # Calculate buy quantity (Note: Always invest 100 INR from portfolio balance)
         buy_quantity = round(buy_q, 2)
+        print("Buy Q:", buy_quantity)
         if balance >= 110:
             payload = {
                 "side": side,
