@@ -12,8 +12,7 @@ def CRYPTO_BOT():
         # Iterate through each asset
         for asset in watchlist:     
             # Get Daily (data frame)
-            # df_1d, _ = get_data(asset, '1d', 1000)
-            df_1d = 1
+            df_1d, _ = get_data(asset, '1d', 1000)
             df_1w, price = get_data(asset, '1w', 1000)
             # Get Conclusion
             result_1d, b1_1d, s1_1d, h1_1d, b2_1d, s2_1d, h2_1d = get_signal(df_1d)
