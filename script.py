@@ -17,14 +17,14 @@ def CRYPTO_BOT():
             
             result_1d, b1_1d, s1_1d, h1_1d, b2_1d, s2_1d, h2_1d = get_signal(df_1d)
             result_1w, b1_1w, s1_1w, h1_1w, b2_1w, s2_1w, h2_1w = get_signal(df_1w)
-            # Cal Final Result
+            
             if result_1d == 1 and result_1w == 1:
-                place_order('buy', asset, price)
-                send_action_alert('Buy', asset, price, result_1d, result_1w, b1_1d, b2_1d, b1_1w, b2_1w, h1_1d, h2_1d, h1_1w, h2_1w)
+                place_order('buy', asset, result_1d, result_1w, b1_1d, b2_1d, b1_1w, b2_1w, h1_1d, h2_1d, h1_1w, h2_1w)
+                logging.info(f"Buy order placed for {asset}")
             elif result_1d == 0 and result_1w == 0:
-                place_order('sell', asset, price)
-                send_action_alert('Sell', asset, price, result_1d, result_1w, s1_1d, s2_1d, s1_1w, s2_1w, h1_1d, h2_1d, h1_1w, h2_1w)            
-        print("[End]")
+                place_order('sell', asset, result_1d, result_1w, s1_1d, s2_1d, s1_1w, s2_1w, h1_1d, h2_1d, h1_1w, h2_1w)
+                logging.info(f"Sell order placed for {asset}")
+        logging.info("[End]")
     except Exception as e:
         logging.error(f"An unexpected error occurred in Crypto Bot: {e}")
 

@@ -46,8 +46,8 @@ def place_order(side, symbol, result_1d, result_1w, b1_1d, b2_1d, b1_1w, b2_1w, 
     price = ticker(symbol)  # Get current price of crypto
     
     if side == 'buy':
-        buy_quantity = 100 / price  # Calculate buy quantity (Note: Always invest 100 INR from portfolio balance)
-        if balance >= 110:
+        buy_quantity = round(float(190 / price), 2)  # Calculate buy quantity (Invest 200 INR, keeping some buffer)
+        if balance >= 200:
             payload = {
                 "side": side,
                 "symbol": symbol,
@@ -74,8 +74,7 @@ def place_order(side, symbol, result_1d, result_1w, b1_1d, b2_1d, b1_1w, b2_1w, 
                 "exchange": "coinswitchx"
             }
             response = api_connector.create_order(payload=payload)
-            if response.get("status") == "success":
-                send_order_alert(side, symbol, price, sell_quantity, balance)
-            else:
-                send_alert(f"Sell Order failed: {response.get('message', 'Unknown error')}")
-                
+            send_order_alert(response)
+        else:
+            error = 'You not have crypto for Sell in Coinswitch portfolio'
+            send_notification_alert('Sell', symbol, price, result_1d, result_1w, b1_1d, b2_1d, b1_1w, b2_1w, h1_1d, h2_1d, h1_1w, h2_1w, error)
