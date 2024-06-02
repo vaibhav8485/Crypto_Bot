@@ -69,10 +69,14 @@ class API:
     
     def check_ping(self):
         return self.make_request("GET", "/trade/api/v2/ping")
+    
+    def get_user_portfolio(self):
+        return self.make_request("GET", "/trade/api/v2/user/portfolio")
+    
+    def ticker(self, params: dict = {}):
+        return self.make_request("GET", "/trade/api/v2/24hr/ticker", params=params)
 
     def create_order(self, payload: dict = {}):
         payload = self.remove_trailing_zeros(payload)
         return self.make_request("POST", "/trade/api/v2/order", payload=payload)
 
-    def get_user_portfolio(self):
-        return self.make_request("GET", "/trade/api/v2/user/portfolio")
