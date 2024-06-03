@@ -2,10 +2,10 @@ name: Crypto Bot
 
 on:
   schedule:
-    - cron: '0 12 * * *'  # 12:00 PM UTC
-    - cron: '0 6 * * *'   # 6:00 AM UTC
-    - cron: '0 21 * * *'  # 9:00 PM UTC
-    - cron: '0 3 * * *'   # 3:00 AM UTC
+    - cron: '0 6 * * *'   # 6:00
+    - cron: '0 9 * * *'   # 9:00
+    - cron: '0 12 * * *'  # 12:00
+    - cron: '0 3 * * *'   # 3:00
   workflow_dispatch:  
 
 jobs:
