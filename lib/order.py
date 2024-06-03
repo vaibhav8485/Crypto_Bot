@@ -46,8 +46,8 @@ def place_order(side, symbol, result_1d, result_1w, b1_1d, b2_1d, b1_1w, b2_1w, 
     price = ticker(symbol)  # Get current price of crypto
     
     if side == 'buy':
-        buy_quantity = round(float(190 / price), 2)  # Calculate buy quantity (Invest 200 INR, keeping some buffer)
-        if balance >= 200:
+        buy_quantity = round(float(200 / price), 2)  # Calculate buy quantity (Invest 200 INR, keeping some buffer)
+        if balance >= 210 and coin_exists == False:
             payload = {
                 "side": side,
                 "symbol": symbol,
@@ -59,12 +59,15 @@ def place_order(side, symbol, result_1d, result_1w, b1_1d, b2_1d, b1_1w, b2_1w, 
             response = api_connector.create_order(payload=payload)
             send_order_alert(response)
         else:
-            error = 'Insufficient funds for trade! Please add more than 200 INR'
+            if coin_exists == False:
+                error = 'Insufficient funds for trade [Mini: 210 INR]'
+            else:
+                error = f'You already have {coin_name}'
             send_notification_alert('Buy', symbol, price, result_1d, result_1w, b1_1d, b2_1d, b1_1w, b2_1w, h1_1d, h2_1d, h1_1w, h2_1w, error)
     
     elif side == 'sell':
         sell_quantity = get_coin_quantity(coin_name)  # Get coin quantity from portfolio
-        if coin_exists and sell_quantity > 0:
+        if sell_quantity > 0 and coin_exists == True:
             payload = {
                 "side": side,
                 "symbol": symbol,
@@ -76,6 +79,6 @@ def place_order(side, symbol, result_1d, result_1w, b1_1d, b2_1d, b1_1w, b2_1w, 
             response = api_connector.create_order(payload=payload)
             send_order_alert(response)
         else:
-            error = f'You not have {coin_name} for Sell in coinswitch portfolio'
+            error = f'You not have {coin_name} for Sell'
             send_notification_alert('Sell', symbol, price, result_1d, result_1w, b1_1d, b2_1d, b1_1w, b2_1w, h1_1d, h2_1d, h1_1w, h2_1w, error)
             
