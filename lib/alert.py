@@ -67,7 +67,7 @@ def send_notification_alert(action, coin, price, signal_1d, signal_1w, s1, s2, s
           - All Indicators: [ Buy: {s3}, Hold: {h1_1w} ] / 44
           - Imp Indicators: [ Buy: {s4}, Hold: {h2_1w} ] / 21
 
-        Warning! : [{error}]     
+        Warning : [{error}]     
         """
     else:
         message = f"""
@@ -84,6 +84,6 @@ def send_notification_alert(action, coin, price, signal_1d, signal_1w, s1, s2, s
           - All Indicators: [ Sell: {s3}, Hold: {h1_1w} ] / 44
           - Imp Indicators: [ Sell: {s4}, Hold: {h2_1w} ] / 21
 
-        Warning! : [{error}]  
+        Warning : [{error}]  
         """
     send_email('Alert!', message)

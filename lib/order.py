@@ -76,5 +76,6 @@ def place_order(side, symbol, result_1d, result_1w, b1_1d, b2_1d, b1_1w, b2_1w, 
             response = api_connector.create_order(payload=payload)
             send_order_alert(response)
         else:
-            error = 'You not have crypto for Sell in Coinswitch portfolio'
+            error = f'You not have {coin_name} for Sell in coinswitch portfolio'
             send_notification_alert('Sell', symbol, price, result_1d, result_1w, b1_1d, b2_1d, b1_1w, b2_1w, h1_1d, h2_1d, h1_1w, h2_1w, error)
+            
