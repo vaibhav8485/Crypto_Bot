@@ -2,7 +2,7 @@ name: Crypto Bot
 
 on:
   schedule:
-    - cron: '0 6 * * *'   # 6:00
+    - cron: '0 6 * * *'   # 6:00 [Day]
     - cron: '0 9 * * *'   # 9:00 [Day]
     - cron: '0 12 * * *'  # 12:00 [Day]
     - cron: '0 3 * * *'   # 3:00 [Day]
