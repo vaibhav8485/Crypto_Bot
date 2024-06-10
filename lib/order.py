@@ -3,7 +3,7 @@ import os
 from lib.api import API
 from lib.alert import send_order_alert, send_notification_alert
 
-# Authentication
+# Authentication Credential
 SECRETKEY = os.environ.get('SECRETKEY')
 APIKEY = os.environ.get('APIKEY')
 
