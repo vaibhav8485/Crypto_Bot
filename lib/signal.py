@@ -1,6 +1,7 @@
 # User Define Modules
 from lib.indicators import Momentum_Indicators, Trend_Indicators, Volatility_Indicators, Volume_Indicators
 
+# Main Function
 def get_signal(df):
     try:
         # Initialize indicator classes

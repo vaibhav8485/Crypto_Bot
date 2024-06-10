@@ -1,28 +1,33 @@
+#STD Modules
 import os
 from lib.api import API
 from lib.alert import send_order_alert, send_notification_alert
 
-# Authentication keys
+# Authentication
 SECRETKEY = os.environ.get('SECRETKEY')
 APIKEY = os.environ.get('APIKEY')
 
-# Create API Object
+# Create API Obj
 api_connector = API(SECRETKEY, APIKEY)
 
+# Create API Obj
 user_portfolio = api_connector.get_user_portfolio()
 
+# Get Balance Function
 def get_main_balance():
     for data in user_portfolio['data']:
         if data['currency'] == 'INR':
             return float(data['main_balance'])
     return 0.0
 
+# Find Crypto Function
 def find_coin(coin_name):
     for data in user_portfolio['data']:
         if data['currency'] == coin_name:
             return True
     return False
 
+# Get Current Price Function
 def ticker(coin_name):
     params = {
         "symbol": coin_name,
@@ -32,13 +37,14 @@ def ticker(coin_name):
     price = round(float(ticker['data']['coinswitchx']['lastPrice']), 4)
     return price
 
+# Get Crypto Quantity
 def get_coin_quantity(coin_name):
     for data in user_portfolio['data']:
         if data['currency'] == coin_name:
             return float(data['main_balance'])
     return 0.0
 
-
+# Main Function
 def place_order(side, symbol, result_1d, result_1w, b1_1d, b2_1d, b1_1w, b2_1w, h1_1d, h2_1d, h1_1w, h2_1w):
     coin_name = symbol.split('/')[0]  # Convert coin name e.g. BTC/INR => BTC
     balance = get_main_balance()  # Get fund or main balance from portfolio

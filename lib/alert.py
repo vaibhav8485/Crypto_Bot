@@ -1,3 +1,4 @@
+# STD Modules
 import smtplib
 import os
 from email.mime.multipart import MIMEMultipart
@@ -12,6 +13,7 @@ RECEIVER = os.environ.get('RECEIVER_MAIL')
 if not SENDER or not PASSWORD or not RECEIVER:
     raise ValueError("Please set the environment variables for email configuration.")
 
+# Main Function
 def send_email(subject, message):
     # Create a multipart message
     msg = MIMEMultipart()
@@ -47,10 +49,12 @@ def send_email(subject, message):
         except Exception as inner_e:
             print(f'Failed to notify sender about the gmail error. Error: {str(inner_e)}')
 
+# Order Notification Function
 def send_order_alert(response):
     message = f"*Message : {response}"
     send_email('Crypto Order', message)
 
+# Alert Notification Function
 def send_notification_alert(action, coin, price, signal_1d, signal_1w, s1, s2, s3, s4, h1_1d, h2_1d, h1_1w, h2_1w, error):
     if action == 'Buy':
         message = f"""

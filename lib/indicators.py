@@ -1,3 +1,4 @@
+# STD Modules
 import ta
 import numpy as np
 
@@ -96,7 +97,6 @@ class Momentum_Indicators:
         except Exception as e:
             print(f"An error occurred in MACD calculation: {e}")
 
-
 # Trend Indicators
 class Trend_Indicators:
     def __init__(self, df):
@@ -166,7 +166,6 @@ class Trend_Indicators:
         
         except Exception as e:
             print(f"An error occurred in SMA calculation: {e}")
-
 
 # Volatility Indicators
 class Volatility_Indicators:
@@ -254,7 +253,6 @@ class Volatility_Indicators:
 
         except Exception as e:
             print(f"An error occurred in Donchian Channel calculation: {e}")
-
 
 # Volume Indicators
 class Volume_Indicators:
