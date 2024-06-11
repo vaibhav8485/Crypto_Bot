@@ -58,38 +58,38 @@ def send_order_alert(response):
 def send_notification_alert(action, coin, price, signal_1d, signal_1w, s1, s2, s3, s4, h1_1d, h2_1d, h1_1w, h2_1w, error):
     if action == 'Buy':
         message = f"""
-        - Order Action: {action}
-        - Coin Name: {coin}
-        - Current Price: {price}
+        Order Action: {action}
+        Coin Name: {coin}
+        Current Price: {price}
 
         
-        Details:
+        [[DETAILS]]
         
-        Daily Chart Signal: {signal_1d}
-          - All Indicators: [ Buy: {s1}, Hold: {h1_1d} ] / 44
-          - Imp Indicators: [ Buy: {s2}, Hold: {h2_1d} ] / 21
-        Weekly Chart Signal: {signal_1w}
-          - All Indicators: [ Buy: {s3}, Hold: {h1_1w} ] / 44
-          - Imp Indicators: [ Buy: {s4}, Hold: {h2_1w} ] / 21
+        Daily Chart Signal : {signal_1d}
+          - All Indicators: [ Buy: {s1}, Hold: {h1_1d} ] Out of (44)
+          - Imp Indicators: [ Buy: {s2}, Hold: {h2_1d} ] Out of (21)
+        Weekly Chart Signal : {signal_1w}
+          - All Indicators: [ Buy: {s3}, Hold: {h1_1w} ] Out of (44)
+          - Imp Indicators: [ Buy: {s4}, Hold: {h2_1w} ] Out of (21)
 
-        *Message : [{error}]     
+        *MESSAGE: [{error}]     
         """
     else:
         message = f"""
-        - Order Action: {action}
-        - Coin Name: {coin}
-        - Current Price: {price}
+        Order Action: {action}
+        Coin Name: {coin}
+        Current Price: {price}
 
         
-        Details:
+        [[DETAILS]]
         
-        Daily Chart Signal: {signal_1d}
-          - All Indicators: [ Sell: {s1}, Hold: {h1_1d} ] / 44
-          - Imp Indicators: [ Sell: {s2}, Hold: {h2_1d} ] / 21
-        Weekly Chart Signal: {signal_1w}
-          - All Indicators: [ Sell: {s3}, Hold: {h1_1w} ] / 44
-          - Imp Indicators: [ Sell: {s4}, Hold: {h2_1w} ] / 21
+        Daily Chart Signal : {signal_1d}
+          - All Indicators: [ Sell: {s1}, Hold: {h1_1d} ] Out of (44)
+          - Imp Indicators: [ Sell: {s2}, Hold: {h2_1d} ] Out of (21)
+        Weekly Chart Signal : {signal_1w}
+          - All Indicators: [ Sell: {s3}, Hold: {h1_1w} ] Out of (44)
+          - Imp Indicators: [ Sell: {s4}, Hold: {h2_1w} ] Out of (21)
 
-        *Message : [{error}]  
+        *MESSAGE: [{error}]  
         """
     send_email('Crypto Alert', message)
