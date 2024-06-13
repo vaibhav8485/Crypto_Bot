@@ -55,7 +55,7 @@ def send_order_alert(response):
     send_email('Crypto Order', message)
 
 # Alert Notification Function
-def send_notification_alert(action, coin, price, signal_1d, signal_1w, s1, s2, s3, s4, h1_1d, h2_1d, h1_1w, h2_1w, error):
+def send_notification_alert(action, coin, price, signal_1d, signal_1w, momentum_buy, trend_buy, volatility_buy, volume_buy, momentum_sell, trend_sell, volatility_sell, volume_sell, error):
     if action == 'Buy':
         message = f"""
         Order Action: {action}
@@ -65,12 +65,13 @@ def send_notification_alert(action, coin, price, signal_1d, signal_1w, s1, s2, s
         
         [[DETAILS]]
         
-        Daily Chart Signal : {signal_1d}
-          - All Indicators: [ Buy: {s1}, Hold: {h1_1d} ] Out of (44)
-          - Imp Indicators: [ Buy: {s2}, Hold: {h2_1d} ] Out of (21)
-        Weekly Chart Signal : {signal_1w}
-          - All Indicators: [ Buy: {s3}, Hold: {h1_1w} ] Out of (44)
-          - Imp Indicators: [ Buy: {s4}, Hold: {h2_1w} ] Out of (21)
+        Daily Timeframe Signal: {signal_1d}
+        Weekly Timeframe Signal: {signal_1w}
+
+        Momentum: {momentum_buy}/11
+        Trend: {trend_buy}/6
+        Volatility: {volatility_buy}/8
+        Volume: {volume_buy}/6
 
         *MESSAGE: [{error}]     
         """
@@ -83,13 +84,14 @@ def send_notification_alert(action, coin, price, signal_1d, signal_1w, s1, s2, s
         
         [[DETAILS]]
         
-        Daily Chart Signal : {signal_1d}
-          - All Indicators: [ Sell: {s1}, Hold: {h1_1d} ] Out of (44)
-          - Imp Indicators: [ Sell: {s2}, Hold: {h2_1d} ] Out of (21)
-        Weekly Chart Signal : {signal_1w}
-          - All Indicators: [ Sell: {s3}, Hold: {h1_1w} ] Out of (44)
-          - Imp Indicators: [ Sell: {s4}, Hold: {h2_1w} ] Out of (21)
+        Daily Timeframe Signal: {signal_1d}
+        Weekly Timeframe Signal: {signal_1w}
 
+        Momentum: {momentum_sell}/11
+        Trend: {trend_sell}/6
+        Volatility: {volatility_sell}/8
+        Volume: {volume_sell}/6
+        
         *MESSAGE: [{error}]  
         """
     send_email('Crypto Alert', message)
