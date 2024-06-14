@@ -40,7 +40,7 @@ class Momentum_Indicators:
             self.df.loc[(self.df['rsi'] > threshold_low) & (self.df['rsi'] < threshold_high), 'signal'] = 'NA'
 
             # Set priority
-            p = 5
+            p = 3
 
             return self.df['signal'].iloc[-1], p
         
@@ -64,7 +64,7 @@ class Momentum_Indicators:
             self.df['signal'] = np.where(self.df['roc'] < 0, 1, 0)
 
             # Set priority
-            p = 4
+            p = 2
 
             return self.df['signal'].iloc[-1], p
         
@@ -103,7 +103,7 @@ class Momentum_Indicators:
             self.df.loc[(self.df['%K'] > threshold_low) & (self.df['%K'] < threshold_high), 'signal'] = 'NA'
         
             # Set priority
-            p = 4
+            p = 3
 
             return self.df['signal'].iloc[-1], p
         
@@ -140,7 +140,7 @@ class Momentum_Indicators:
             self.df.loc[(self.df['macd_line'] < 0) & (self.df['macd_signal'] < 0), 'zero_line'] = 1
 
             # Set priority
-            p = 5
+            p = 3
 
             return self.df['signal'].iloc[-1], self.df['zero_line'].iloc[-1], p
         
@@ -178,7 +178,7 @@ class Trend_Indicators:
             self.df.loc[self.df['aroon_down'] == 100, 'signal'] = 1
         
             # Set priority
-            p = 4
+            p = 3
 
             return self.df['signal'].iloc[-1], p
         
@@ -200,7 +200,7 @@ class Trend_Indicators:
             self.df['signal'] = np.where(self.df['close'] > self.df['ema'], 0, 1)
             
             # Set priority
-            p = 3
+            p = 1
 
             return self.df['signal'].iloc[-1], p
         
@@ -223,7 +223,7 @@ class Trend_Indicators:
             self.df['signal'] = np.where(self.df['close'] > self.df['wma'], 0, 1)
         
             # Set priority
-            p = 3
+            p = 1
 
             return self.df['signal'].iloc[-1], p
         
@@ -246,7 +246,7 @@ class Trend_Indicators:
             self.df['signal'] = np.where(self.df['close'] >= self.df['sma'], 0, 1)
         
             # Set priority
-            p = 3
+            p = 1
 
             return self.df['signal'].iloc[-1], p
         
@@ -334,7 +334,7 @@ class Volatility_Indicators:
             self.df.loc[self.df['close'] <= self.df['lower_band'], 'signal'] = 1
 
             # Set priority
-            p = 2
+            p = 1
 
             return self.df['signal'].iloc[-1], p
 
@@ -423,7 +423,7 @@ class Volume_Indicators:
             self.df.loc[self.df['cmf'] < 0, 'signal'] = 1
 
             # Set priority
-            p = 1
+            p = 2
 
             return self.df['signal'].iloc[-1], p
 
@@ -471,7 +471,7 @@ class Volume_Indicators:
             self.df.loc[self.df['mfi'] <= threshold_low, 'signal'] = 1
 
             # Set priority
-            p = 1
+            p = 2
 
             return self.df['signal'].iloc[-1], p
 
