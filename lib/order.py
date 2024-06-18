@@ -45,7 +45,7 @@ def get_coin_quantity(coin_name):
     return 0.0
 
 # Main Function
-def place_order(side, symbol, result_1d, result_1w, momentum_buy, trend_buy, volatility_buy, volume_buy, momentum_sell, trend_sell, volatility_sell, volume_sell):
+def place_order(side, symbol, result_1d, result_1w, result_1m, d_momentum_buy, d_trend_buy, d_volatility_buy, d_volume_buy, d_momentum_sell, d_trend_sell, d_volatility_sell, d_volume_sell, w_momentum_buy, w_momentum_sell, w_trend_buy, w_trend_sell, w_volatility_buy, w_volatility_sell, w_volume_buy, w_volume_sell, m_momentum_buy, m_momentum_sell, m_trend_buy, m_trend_sell, m_volatility_buy, m_volatility_sell, m_volume_buy, m_volume_sell):
     coin_name = symbol.split('/')[0]  # Convert coin name e.g. BTC/INR => BTC
     balance = get_main_balance()  # Get fund or main balance from portfolio
     coin_exists = find_coin(coin_name)  # Check the coin exists in portfolio or not
@@ -62,14 +62,14 @@ def place_order(side, symbol, result_1d, result_1w, momentum_buy, trend_buy, vol
                 "quantity": buy_quantity,
                 "exchange": "coinswitchx"
             }
-            response = api_connector.create_order(payload=payload)
-            send_order_alert(response)
+            # response = api_connector.create_order(payload=payload)
+            # send_order_alert(response)
         else:
             if coin_exists == False:
                 error = 'Insufficient funds for trade [Mini: 210 INR]'
             else:
                 error = f'You already have {coin_name}'
-            send_notification_alert('Buy', symbol, price, result_1d, result_1w, momentum_buy, trend_buy, volatility_buy, volume_buy, momentum_sell, trend_sell, volatility_sell, volume_sell, error)
+            send_notification_alert('Buy', symbol, price, result_1d, result_1w, result_1m, d_momentum_buy, d_trend_buy, d_volatility_buy, d_volume_buy, d_momentum_sell, d_trend_sell, d_volatility_sell, d_volume_sell, w_momentum_buy, w_trend_buy, w_volatility_buy, w_volume_buy, w_momentum_sell, w_trend_sell, w_volatility_sell, w_volume_sell, m_momentum_buy, m_trend_buy, m_volatility_buy, m_volume_buy, m_momentum_sell, m_trend_sell, m_volatility_sell, m_volume_sell, error)
     
     elif side == 'sell':
         sell_quantity = get_coin_quantity(coin_name)  # Get coin quantity from portfolio
@@ -82,9 +82,9 @@ def place_order(side, symbol, result_1d, result_1w, momentum_buy, trend_buy, vol
                 "quantity": sell_quantity,
                 "exchange": "coinswitchx"
             }
-            response = api_connector.create_order(payload=payload)
-            send_order_alert(response)
+            # response = api_connector.create_order(payload=payload)
+            # send_order_alert(response)
         else:
             error = f'You not have {coin_name} for Sell'
-            send_notification_alert('Sell', symbol, price, result_1d, result_1w, momentum_buy, trend_buy, volatility_buy, volume_buy, momentum_sell, trend_sell, volatility_sell, volume_sell, error)
+            send_notification_alert('Sell', symbol, price, result_1d, result_1w, result_1m, d_momentum_buy, d_trend_buy, d_volatility_buy, d_volume_buy, d_momentum_sell, d_trend_sell, d_volatility_sell, d_volume_sell, w_momentum_buy, w_momentum_sell, w_trend_buy, w_trend_sell, w_volatility_buy, w_volatility_sell, w_volume_buy, w_volume_sell, m_momentum_buy, m_momentum_sell, m_trend_buy, m_trend_sell, m_volatility_buy, m_volatility_sell, m_volume_buy, m_volume_sell, error)
             

@@ -52,10 +52,10 @@ def send_email(subject, message):
 # Order Notification Function
 def send_order_alert(response):
     message = f"*Message : {response}"
-    send_email('Crypto Order', message)
+    send_email('Crypto Order Placed', message)
 
 # Alert Notification Function
-def send_notification_alert(action, coin, price, signal_1d, signal_1w, momentum_buy, trend_buy, volatility_buy, volume_buy, momentum_sell, trend_sell, volatility_sell, volume_sell, error):
+def send_notification_alert(action, coin, price, signal_1d, signal_1w, signal_1m, d_momentum_buy, d_trend_buy, d_volatility_buy, d_volume_buy, d_momentum_sell, d_trend_sell, d_volatility_sell, d_volume_sell, w_momentum_buy, w_momentum_sell, w_trend_buy, w_trend_sell, w_volatility_buy, w_volatility_sell, w_volume_buy, w_volume_sell, m_momentum_buy, m_momentum_sell, m_trend_buy, m_trend_sell, m_volatility_buy, m_volatility_sell, m_volume_buy, m_volume_sell, error):
     if action == 'Buy':
         message = f"""
         Order Action: {action}
@@ -63,15 +63,28 @@ def send_notification_alert(action, coin, price, signal_1d, signal_1w, momentum_
         Current Price: {price}
 
         
-        [[DETAILS]]
-        
-        Daily Timeframe Signal: {signal_1d}
-        Weekly Timeframe Signal: {signal_1w}
+        [DETAILS]
+        Daily Signal: {signal_1d}
+        Weekly Signal: {signal_1w}
+        Monthly Signal: {signal_1m}
 
-        Momentum: {momentum_buy}/11
-        Trend: {trend_buy}/6
-        Volatility: {volatility_buy}/8
-        Volume: {volume_buy}/6
+        [Daily]
+        Momentum: {d_momentum_buy}/11
+        Trend: {d_trend_buy}/6
+        Volatility: {d_volatility_buy}/8
+        Volume: {d_volume_buy}/6
+
+        [Weekly]
+        Momentum: {w_momentum_buy}/11
+        Trend: {w_trend_buy}/6
+        Volatility: {w_volatility_buy}/8
+        Volume: {w_volume_buy}/6
+
+        [Monthly]
+        Momentum: {m_momentum_buy}/11
+        Trend: {m_trend_buy}/6
+        Volatility: {m_volatility_buy}/8
+        Volume: {m_volume_buy}/6
 
         *MESSAGE: [{error}]     
         """
@@ -82,15 +95,28 @@ def send_notification_alert(action, coin, price, signal_1d, signal_1w, momentum_
         Current Price: {price}
 
         
-        [[DETAILS]]
-        
-        Daily Timeframe Signal: {signal_1d}
-        Weekly Timeframe Signal: {signal_1w}
+        [DETAILS]
+        Daily Signal: {signal_1d}
+        Weekly Signal: {signal_1w}
+        Monthly Signal: {signal_1m}
 
-        Momentum: {momentum_sell}/11
-        Trend: {trend_sell}/6
-        Volatility: {volatility_sell}/8
-        Volume: {volume_sell}/6
+        [Daily]
+        Momentum: {d_momentum_sell}/11
+        Trend: {d_trend_sell}/6
+        Volatility: {d_volatility_sell}/8
+        Volume: {d_volume_sell}/6
+
+        [Weekly]
+        Momentum: {w_momentum_sell}/11
+        Trend: {w_trend_sell}/6
+        Volatility: {w_volatility_sell}/8
+        Volume: {w_volume_sell}/6
+
+        [Monthly]
+        Momentum: {m_momentum_sell}/11
+        Trend: {m_trend_sell}/6
+        Volatility: {m_volatility_sell}/8
+        Volume: {m_volume_sell}/6
         
         *MESSAGE: [{error}]  
         """
