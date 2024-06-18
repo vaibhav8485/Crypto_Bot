@@ -62,9 +62,8 @@ def place_order(side, symbol, result_1d, result_1w, result_1m, d_momentum_buy, d
                 "quantity": buy_quantity,
                 "exchange": "coinswitchx"
             }
-            # response = api_connector.create_order(payload=payload)
-            # send_order_alert(response)
-            print("Buy Order Placed Testing....")
+            response = api_connector.create_order(payload=payload)
+            send_order_alert(response)
         else:
             if coin_exists == False:
                 error = 'Insufficient funds for trade [Mini: 210 INR]'
@@ -83,10 +82,8 @@ def place_order(side, symbol, result_1d, result_1w, result_1m, d_momentum_buy, d
                 "quantity": sell_quantity,
                 "exchange": "coinswitchx"
             }
-            # response = api_connector.create_order(payload=payload)
-            # send_order_alert(response)
-            print("Sell Order Placed Testing....")
-
+            response = api_connector.create_order(payload=payload)
+            send_order_alert(response)
         else:
             error = f'You not have {coin_name} for Sell'
             send_notification_alert('Sell', symbol, price, result_1d, result_1w, result_1m, d_momentum_buy, d_trend_buy, d_volatility_buy, d_volume_buy, d_momentum_sell, d_trend_sell, d_volatility_sell, d_volume_sell, w_momentum_buy, w_momentum_sell, w_trend_buy, w_trend_sell, w_volatility_buy, w_volatility_sell, w_volume_buy, w_volume_sell, m_momentum_buy, m_momentum_sell, m_trend_buy, m_trend_sell, m_volatility_buy, m_volatility_sell, m_volume_buy, m_volume_sell, error)
