@@ -3,7 +3,7 @@
     {
       "symbol": "BTC/INR",
       "buy_price": 0,
-      "status": "auto"
+      "status": "hold"
     },
     {
       "symbol": "ETH/INR",
@@ -12,6 +12,7 @@
     },
     {
       "symbol": "MATIC/INR",
+<<<<<<< HEAD
       "buy_price": 50.45,
       "status": "auto"
     },
@@ -29,6 +30,25 @@
       "symbol": "BAT/INR",
       "buy_price": 17.24,
       "status": "auto"
+=======
+      "buy_price": 0,
+      "status": "hold"
+    },
+    {
+      "symbol": "XRP/INR",
+      "buy_price": 0,
+      "status": "hold"
+    },
+    {
+      "symbol": "ADA/INR",
+      "buy_price": 0,
+      "status": "hold"
+    },
+    {
+      "symbol": "BAT/INR",
+      "buy_price": 0,
+      "status": "hold"
+>>>>>>> 4dc220b41ec6af63652503b2df60951ceca55c48
     },
     {
       "symbol": "BNB/INR",
@@ -37,8 +57,13 @@
     },
     {
       "symbol": "SOL/INR",
+<<<<<<< HEAD
       "buy_price": 11636.74,
       "status": "auto"
+=======
+      "buy_price": 0,
+      "status": "hold"
+>>>>>>> 4dc220b41ec6af63652503b2df60951ceca55c48
     },
     {
       "symbol": "NEAR/INR",
@@ -48,10 +73,11 @@
     {
       "symbol": "SAND/INR",
       "buy_price": 0,
-      "status": "auto"
+      "status": "hold"
     },
     {
       "symbol": "DOGE/INR",
+<<<<<<< HEAD
       "buy_price": 10.74,
       "status": "auto"
     },
@@ -59,6 +85,15 @@
       "symbol": "STX/INR",
       "buy_price": 142.94,
       "status": "auto"
+=======
+      "buy_price": 0,
+      "status": "hold"
+    },
+    {
+      "symbol": "STX/INR",
+      "buy_price": 0,
+      "status": "hold"
+>>>>>>> 4dc220b41ec6af63652503b2df60951ceca55c48
     }
   ]
 }
