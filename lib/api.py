@@ -1,8 +1,17 @@
+# STD Modules
 from cryptography.hazmat.primitives.asymmetric import ed25519
 from urllib.parse import urlparse, urlencode
 import urllib
 import json
 import requests
+import os
+import logging
+
+# User Define Modules
+from lib.risk import load_log_file, update_log_file
+
+# Basic configuration for logging
+logging.basicConfig(level=logging.INFO)
 
 class API:
     def __init__(self, secret_key: str, api_key: str):
@@ -80,3 +89,111 @@ class API:
         payload = self.remove_trailing_zeros(payload)
         return self.make_request("POST", "/trade/api/v2/order", payload=payload)
 
+# Authentication Credential
+SECRETKEY = os.environ.get('SECRETKEY')
+APIKEY = os.environ.get('APIKEY')
+
+# Create API Obj
+api_connector = API(SECRETKEY, APIKEY)
+
+# Get Portfolio Information
+user_portfolio = api_connector.get_user_portfolio()
+
+# Get INR Balance
+def get_main_balance():
+    for data in user_portfolio['data']:
+        if data['currency'] == 'INR':
+            return float(data['main_balance'])
+    return 0.0
+
+# Find Crypto Function
+def find_coin(symbol):
+    crypto_name = symbol.split('/')[0]
+    for data in user_portfolio['data']:
+        if data['currency'] == crypto_name:
+            return True
+    return False
+
+# Get Current Price of Crypto
+def ticker(coin_name):
+    params = {
+        "symbol": coin_name,
+        "exchange": "coinswitchx"
+    }
+    ticker = api_connector.ticker(params=params)
+    price = round(float(ticker['data']['coinswitchx']['lastPrice']), 4)
+    return price
+
+# Get Crypto Quantity
+def get_coin_quantity(symbol):
+    crypto_name = symbol.split('/')[0]
+    for data in user_portfolio['data']:
+        if data['currency'] == crypto_name:
+            return float(data['main_balance'])
+    return 0.0
+
+# Get Crypto Count that Not Exists
+def get_investment_amount():
+    # Crypto Watch list (12 Assets)
+    watchlist = ["BTC/INR", "ETH/INR", "MATIC/INR", "XRP/INR", "ADA/INR", "BAT/INR", "BNB/INR", "SOL/INR", "NEAR/INR", "SAND/INR", "DOGE/INR", "STX/INR"]
+    count = 0 # Set Count 0 Default
+    for symbol in watchlist:
+        coin_exists = find_coin(symbol)
+        if coin_exists == False:
+            count += 1
+
+    balance = get_main_balance()
+    amount = balance / count
+
+    # Return quantity
+    return int(amount)
+
+# Place Buy Order
+def buy_order(symbol):
+    try:
+        price = ticker(symbol) # Get Current Price
+        buy_amount = get_investment_amount() # Get Crypto Count
+        buy_quantity = round(float(buy_amount / price), 4) # Cal Buy Quantity
+        payload = {
+            "side": "buy",
+            "symbol": symbol,
+            "type": "limit",
+            "price": price + 1,  # Adding a small buffer to the price
+            "quantity": buy_quantity,
+            "exchange": "coinswitchx"
+        }
+        response = api_connector.create_order(payload=payload)
+
+        filename = "log.json" # Log File Name
+        file_path = os.path.abspath(filename) # Get the absolute path
+        log = load_log_file(file_path) # Load JSON File
+
+        if log:     
+            # Update Buy Buy Log.JSON
+            update_log_file(file_path, symbol, price, 'auto')
+
+            # Return Buy Order Response
+            return response
+        else:
+            print(f"File '{file_path}' does not exist or is empty.")
+    except Exception as e:
+        logging.error(f"An unexpected error occurred in Buy Order: {e}")
+
+# Place Sell Order
+def sell_order(symbol):
+    try:
+        price = ticker(symbol) # Get Current Crypto Price
+        sell_quantity = get_coin_quantity(symbol) # Get Quantity
+        payload = {
+            "side": "sell",
+            "symbol": symbol,
+            "type": "limit",
+            "price": price - 1,  # Subtracting a small buffer from the price
+            "quantity": sell_quantity,
+            "exchange": "coinswitchx"
+        }
+        response = api_connector.create_order(payload=payload)
+        # Return Sell Order Response
+        return response
+    except Exception as e:
+        logging.error(f"An unexpected error occurred in Sell Order: {e}")

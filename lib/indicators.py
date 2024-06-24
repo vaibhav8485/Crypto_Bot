@@ -39,10 +39,7 @@ class Momentum_Indicators:
             # Optionally, handle the 'middle' signals (neither overbought nor oversold)
             self.df.loc[(self.df['rsi'] > threshold_low) & (self.df['rsi'] < threshold_high), 'signal'] = 'NA'
 
-            # Set priority
-            p = 3
-
-            return self.df['signal'].iloc[-1], p
+            return self.df['signal'].iloc[-1], 3 
         
         except Exception as e:
             print(f"An error occurred in RSI calculation: {e}")
@@ -63,10 +60,7 @@ class Momentum_Indicators:
             # Assign signals based on ROC values
             self.df['signal'] = np.where(self.df['roc'] < 0, 1, 0)
 
-            # Set priority
-            p = 2
-
-            return self.df['signal'].iloc[-1], p
+            return self.df['signal'].iloc[-1], 2
         
         except Exception as e:
             print(f"An error occurred in ROC calculation: {e}")
@@ -101,11 +95,8 @@ class Momentum_Indicators:
             self.df.loc[self.df['%K'] <= threshold_low, 'signal'] = 1
             # Optionally, handle the 'middle' signals
             self.df.loc[(self.df['%K'] > threshold_low) & (self.df['%K'] < threshold_high), 'signal'] = 'NA'
-        
-            # Set priority
-            p = 3
 
-            return self.df['signal'].iloc[-1], p
+            return self.df['signal'].iloc[-1], 3
         
         except Exception as e:
             print(f"An error occurred in Stochastic Oscillator calculation: {e}")
@@ -139,10 +130,7 @@ class Momentum_Indicators:
             self.df.loc[(self.df['macd_line'] < self.df['macd_signal']), 'signal'] = 1
             self.df.loc[(self.df['macd_line'] < 0) & (self.df['macd_signal'] < 0), 'zero_line'] = 1
 
-            # Set priority
-            p = 3
-
-            return self.df['signal'].iloc[-1], self.df['zero_line'].iloc[-1], p
+            return self.df['signal'].iloc[-1], self.df['zero_line'].iloc[-1], 3
         
         except Exception as e:
             print(f"An error occurred in MACD calculation: {e}")
@@ -176,11 +164,8 @@ class Trend_Indicators:
             # Generate signals based on Aroon indicator reaching 100
             self.df.loc[self.df['aroon_up'] == 100, 'signal'] = 0
             self.df.loc[self.df['aroon_down'] == 100, 'signal'] = 1
-        
-            # Set priority
-            p = 3
 
-            return self.df['signal'].iloc[-1], p
+            return self.df['signal'].iloc[-1], 3
         
         except Exception as e:
             print(f"An error occurred in Aroon calculation: {e}")
@@ -198,11 +183,8 @@ class Trend_Indicators:
             self.df['ema'] = ema.ema_indicator().fillna(0)
             # Add buy and sell signals based on EMA and close price comparison
             self.df['signal'] = np.where(self.df['close'] > self.df['ema'], 0, 1)
-            
-            # Set priority
-            p = 1
 
-            return self.df['signal'].iloc[-1], p
+            return self.df['signal'].iloc[-1], 1
         
         except Exception as e:
             print(f"An error occurred in EMA calculation: {e}")
@@ -221,11 +203,8 @@ class Trend_Indicators:
             self.df['wma'] = wma.wma().fillna(0)
             # Add buy and sell signals based on WMA and close price comparison
             self.df['signal'] = np.where(self.df['close'] > self.df['wma'], 0, 1)
-        
-            # Set priority
-            p = 1
 
-            return self.df['signal'].iloc[-1], p
+            return self.df['signal'].iloc[-1], 1
         
         except Exception as e:
             print(f"An error occurred in WMA calculation: {e}")
@@ -244,11 +223,8 @@ class Trend_Indicators:
             self.df['sma'] = sma.sma_indicator().fillna(0)
             # Add buy and sell signals based on SMA and close price comparison
             self.df['signal'] = np.where(self.df['close'] >= self.df['sma'], 0, 1)
-        
-            # Set priority
-            p = 1
 
-            return self.df['signal'].iloc[-1], p
+            return self.df['signal'].iloc[-1], 1
         
         except Exception as e:
             print(f"An error occurred in SMA calculation: {e}")
@@ -283,10 +259,7 @@ class Volatility_Indicators:
             self.df.loc[self.df['high'] >= self.df['upper_band'], 'signal'] = 0
             self.df.loc[self.df['low'] <= self.df['lower_band'], 'signal'] = 1
 
-            # Set priority
-            p = 3
-
-            return self.df['signal'].iloc[-1], p
+            return self.df['signal'].iloc[-1], 3
 
         except Exception as e:
             print(f"An error occurred in Bollinger Bands calculation: {e}")
@@ -305,10 +278,7 @@ class Volatility_Indicators:
             # Determine volatility signal
             self.df['signal'] = np.where(self.df['adx'] < threshold, 1, 0)
 
-            # Set priority
-            p = 2
-
-            return self.df['signal'].iloc[-1], p
+            return self.df['signal'].iloc[-1], 2
 
         except Exception as e:
             print(f"An error occurred in ADX calculation: {e}")
@@ -333,10 +303,7 @@ class Volatility_Indicators:
             self.df.loc[self.df['close'] >= self.df['upper_band'], 'signal'] = 0
             self.df.loc[self.df['close'] <= self.df['lower_band'], 'signal'] = 1
 
-            # Set priority
-            p = 1
-
-            return self.df['signal'].iloc[-1], p
+            return self.df['signal'].iloc[-1], 1
 
         except Exception as e:
             print(f"An error occurred in Keltner Channel calculation: {e}")
@@ -361,10 +328,7 @@ class Volatility_Indicators:
             self.df.loc[self.df['high'] >= self.df['upper_band'], 'signal'] = 0
             self.df.loc[self.df['low'] <= self.df['lower_band'], 'signal'] = 1
 
-            # Set priority
-            p = 2
-
-            return self.df['signal'].iloc[-1], p
+            return self.df['signal'].iloc[-1], 2
 
         except Exception as e:
             print(f"An error occurred in Donchian Channel calculation: {e}")
@@ -397,10 +361,7 @@ class Volume_Indicators:
             self.df.loc[self.df['obv'] > threshold_high, 'signal'] = 0
             self.df.loc[self.df['obv'] < threshold_low, 'signal'] = 1
 
-            # Set priority
-            p = 1
-
-            return self.df['signal'].iloc[-1], p
+            return self.df['signal'].iloc[-1], 1
 
         except Exception as e:
             print(f"An error occurred in OBV calculation: {e}")
@@ -422,10 +383,7 @@ class Volume_Indicators:
             self.df.loc[self.df['cmf'] > 0, 'signal'] = 0
             self.df.loc[self.df['cmf'] < 0, 'signal'] = 1
 
-            # Set priority
-            p = 2
-
-            return self.df['signal'].iloc[-1], p
+            return self.df['signal'].iloc[-1], 2
 
         except Exception as e:
             print(f"An error occurred in CMF calculation: {e}")
@@ -445,15 +403,12 @@ class Volume_Indicators:
             self.df.loc[self.df['eom'] > 0, 'signal'] = 0
             self.df.loc[self.df['eom'] < 0, 'signal'] = 1
 
-            # Set priority
-            p = 1
-
-            return self.df['signal'].iloc[-1], p
+            return self.df['signal'].iloc[-1], 1
 
         except Exception as e:
             print(f"An error occurred in EOM calculation: {e}")
 
-    def mfi(self, window=14, threshold_high=80, threshold_low=20):
+    def mfi(self, window=14, threshold_high=70, threshold_low=30):
         try:
             # Make a copy of the original DataFrame
             self.df = self.original_df.copy()
@@ -470,10 +425,7 @@ class Volume_Indicators:
             self.df.loc[self.df['mfi'] >= threshold_high, 'signal'] = 0
             self.df.loc[self.df['mfi'] <= threshold_low, 'signal'] = 1
 
-            # Set priority
-            p = 2
-
-            return self.df['signal'].iloc[-1], p
+            return self.df['signal'].iloc[-1], 2
 
         except Exception as e:
             print(f"An error occurred in MFI calculation: {e}")

@@ -119,7 +119,7 @@ def get_signal(df):
             final_signal = 'Hold'
 
         # Return Final Signal
-        return final_signal, momentum_buy, momentum_sell, trend_buy, trend_sell, volatility_buy, volatility_sell, volume_buy, volume_sell
+        return final_signal
 
     except Exception as e:
         print(f"An unexpected error occurred in Signal Section: {e}")

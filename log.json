@@ -1,0 +1,64 @@
+{
+  "data": [
+    {
+      "symbol": "BTC/INR",
+      "buy_price": 0,
+      "status": "auto"
+    },
+    {
+      "symbol": "ETH/INR",
+      "buy_price": 0,
+      "status": "auto"
+    },
+    {
+      "symbol": "MATIC/INR",
+      "buy_price": 0,
+      "status": "auto"
+    },
+    {
+      "symbol": "XRP/INR",
+      "buy_price": 0,
+      "status": "auto"
+    },
+    {
+      "symbol": "ADA/INR",
+      "buy_price": 0,
+      "status": "auto"
+    },
+    {
+      "symbol": "BAT/INR",
+      "buy_price": 0,
+      "status": "auto"
+    },
+    {
+      "symbol": "BNB/INR",
+      "buy_price": 0,
+      "status": "auto"
+    },
+    {
+      "symbol": "SOL/INR",
+      "buy_price": 0,
+      "status": "auto"
+    },
+    {
+      "symbol": "NEAR/INR",
+      "buy_price": 0,
+      "status": "auto"
+    },
+    {
+      "symbol": "SAND/INR",
+      "buy_price": 0,
+      "status": "auto"
+    },
+    {
+      "symbol": "DOGE/INR",
+      "buy_price": 0,
+      "status": "auto"
+    },
+    {
+      "symbol": "STX/INR",
+      "buy_price": 0,
+      "status": "auto"
+    }
+  ]
+}
