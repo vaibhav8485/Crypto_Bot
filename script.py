@@ -61,7 +61,9 @@ def RISK_MANAGEMENT():
     try:
         logging.info("[Start: RISK_MANAGEMENT()]")
         for data in log_data.get('data', []):
-            symbol = data['symbol'] # Get Crypto Name 
+            
+            symbol = data['symbol'] # Get Crypto Name
+            print("Log Symbol:", symbol)
             current_price = ticker(symbol) # Get Current Price of Crypto
             buy_price = data['buy_price'] # Get Purchasing Price of Crypto
             crypto_exists = find_coin(symbol)  # Check the coin exists in portfolio or not
