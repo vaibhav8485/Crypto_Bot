@@ -32,11 +32,11 @@ def CRYPTO_BOT():
             result_1m, m_momentum_buy, m_momentum_sell, m_trend_buy, m_trend_sell, m_volatility_buy, m_volatility_sell, m_volume_buy, m_volume_sell  = get_signal(df_1m) # Get 1 Month Signal
             
             if result_1d == 1 and result_1w == 1: # For BUY
-                place_order('buy', asset, result_1d, result_1w, result_1m, d_momentum_buy, d_trend_buy, d_volatility_buy, d_volume_buy, d_momentum_sell, d_trend_sell, d_volatility_sell, d_volume_sell, w_momentum_buy, w_momentum_sell, w_trend_buy, w_trend_sell, w_volatility_buy, w_volatility_sell, w_volume_buy, w_volume_sell, m_momentum_buy, m_momentum_sell, m_trend_buy, m_trend_sell, m_volatility_buy, m_volatility_sell, m_volume_buy, m_volume_sell)
+                # place_order('buy', asset, result_1d, result_1w, result_1m, d_momentum_buy, d_trend_buy, d_volatility_buy, d_volume_buy, d_momentum_sell, d_trend_sell, d_volatility_sell, d_volume_sell, w_momentum_buy, w_momentum_sell, w_trend_buy, w_trend_sell, w_volatility_buy, w_volatility_sell, w_volume_buy, w_volume_sell, m_momentum_buy, m_momentum_sell, m_trend_buy, m_trend_sell, m_volatility_buy, m_volatility_sell, m_volume_buy, m_volume_sell)
                 logging.info(f"Buy order placed for {asset}")
             
             elif result_1d == 0 and result_1w == 0: # For SELL
-                place_order('sell', asset, result_1d, result_1w, result_1m, d_momentum_buy, d_trend_buy, d_volatility_buy, d_volume_buy, d_momentum_sell, d_trend_sell, d_volatility_sell, d_volume_sell, w_momentum_buy, w_momentum_sell, w_trend_buy, w_trend_sell, w_volatility_buy, w_volatility_sell, w_volume_buy, w_volume_sell, m_momentum_buy, m_momentum_sell, m_trend_buy, m_trend_sell, m_volatility_buy, m_volatility_sell, m_volume_buy, m_volume_sell)
+                # place_order('sell', asset, result_1d, result_1w, result_1m, d_momentum_buy, d_trend_buy, d_volatility_buy, d_volume_buy, d_momentum_sell, d_trend_sell, d_volatility_sell, d_volume_sell, w_momentum_buy, w_momentum_sell, w_trend_buy, w_trend_sell, w_volatility_buy, w_volatility_sell, w_volume_buy, w_volume_sell, m_momentum_buy, m_momentum_sell, m_trend_buy, m_trend_sell, m_volatility_buy, m_volatility_sell, m_volume_buy, m_volume_sell)
                 logging.info(f"Sell order placed for {asset}")
 
         logging.info("[End:Script]")
