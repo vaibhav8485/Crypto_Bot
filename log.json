@@ -3,7 +3,7 @@
     {
       "symbol": "BTC/INR",
       "buy_price": 0,
-      "status": "auto"
+      "status": "hold"
     },
     {
       "symbol": "ETH/INR",
@@ -17,7 +17,7 @@
     },
     {
       "symbol": "XRP/INR",
-      "buy_price": 43.70,
+      "buy_price": 43.7,
       "status": "auto"
     },
     {
@@ -48,7 +48,7 @@
     {
       "symbol": "SAND/INR",
       "buy_price": 0,
-      "status": "auto"
+      "status": "hold"
     },
     {
       "symbol": "DOGE/INR",
