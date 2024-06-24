@@ -47,7 +47,7 @@ jobs:
           git add log.json
           git commit -m "Update log.json with execution status on $GITHUB_RUN_TIMESTAMP"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
-          git push origin HEAD:main
+          git push origin HEAD:master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
             
