@@ -88,4 +88,4 @@ def RISK_MANAGEMENT():
 # Execution Start form this
 if __name__ == "__main__":
     RISK_MANAGEMENT() # Calling Risk Management Function 
-    CRYPTO_BOT() # Calling Main Function
+    # CRYPTO_BOT() # Calling Main Function
