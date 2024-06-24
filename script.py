@@ -18,6 +18,7 @@ logging.basicConfig(level=logging.INFO)
 file_path = 'log.json'
 print("Log File Path:", file_path)
 log_data = load_log_file(file_path) # Load Buy.JSON File
+print("Log Data:", log_data)
 
 # Crypto Watch list (12 Assets)
 watchlist = ["BTC/INR", "ETH/INR", "MATIC/INR", "XRP/INR", "ADA/INR", "BAT/INR", "BNB/INR", "SOL/INR", "NEAR/INR", "SAND/INR", "DOGE/INR", "STX/INR"]
@@ -64,7 +65,6 @@ def RISK_MANAGEMENT():
         for data in log_data.get('data', []):
             
             symbol = data['symbol'] # Get Crypto Name
-            print("Log Symbol:", symbol)
             current_price = ticker(symbol) # Get Current Price of Crypto
             buy_price = data['buy_price'] # Get Purchasing Price of Crypto
             crypto_exists = find_coin(symbol)  # Check the coin exists in portfolio or not
