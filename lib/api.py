@@ -164,9 +164,9 @@ def buy_order(symbol):
         }
         response = api_connector.create_order(payload=payload)
 
-        filename = "log.json" # Log File Name
-        file_path = os.path.abspath(filename) # Get the absolute path
+        file_path = "log.json" # Log File Name
         log = load_log_file(file_path) # Load JSON File
+        print("Log Data Inside Buy Order:", log)
 
         if log:     
             # Update Buy Buy Log.JSON
