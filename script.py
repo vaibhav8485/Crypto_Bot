@@ -1,6 +1,5 @@
 # STD Modules
 import logging
-import os
 
 # User Define Modules
 from lib.dataset import get_data, get_month_data  # Get dataset
@@ -59,13 +58,12 @@ def RISK_MANAGEMENT():
     try:
         logging.info("[Start: RISK_MANAGEMENT()]")
         for data in log_data.get('data', []):
-            
             symbol = data['symbol'] # Get Crypto Name
             current_price = ticker(symbol) # Get Current Price of Crypto
             buy_price = data['buy_price'] # Get Purchasing Price of Crypto
             crypto_exists = find_coin(symbol)  # Check the coin exists in portfolio or not
-            stop_loss_price = get_stop_loss(buy_price, 5) # Calculate Stop Loss Price (Note: 10%)
-            target_price = get_target(buy_price, 20) # Calculate Target Price (Note: 20%)
+            stop_loss_price = get_stop_loss(buy_price, 20) # Calculate Stop Loss Price (Note: 10%)
+            target_price = get_target(buy_price, 50) # Calculate Target Price (Note: 20%)
 
             # For Stop Loss Hit
             if current_price <= stop_loss_price and crypto_exists == True:

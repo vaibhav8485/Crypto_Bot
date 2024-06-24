@@ -12,22 +12,22 @@
     },
     {
       "symbol": "MATIC/INR",
-      "buy_price": 0,
+      "buy_price": 50.45,
       "status": "auto"
     },
     {
       "symbol": "XRP/INR",
-      "buy_price": 0,
+      "buy_price": 43.70,
       "status": "auto"
     },
     {
       "symbol": "ADA/INR",
-      "buy_price": 0,
+      "buy_price": 34.03,
       "status": "auto"
     },
     {
       "symbol": "BAT/INR",
-      "buy_price": 0,
+      "buy_price": 17.24,
       "status": "auto"
     },
     {
@@ -37,7 +37,7 @@
     },
     {
       "symbol": "SOL/INR",
-      "buy_price": 0,
+      "buy_price": 11636.74,
       "status": "auto"
     },
     {
@@ -52,12 +52,12 @@
     },
     {
       "symbol": "DOGE/INR",
-      "buy_price": 0,
+      "buy_price": 10.74,
       "status": "auto"
     },
     {
       "symbol": "STX/INR",
-      "buy_price": 0,
+      "buy_price": 142.94,
       "status": "auto"
     }
   ]
