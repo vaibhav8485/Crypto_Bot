@@ -13,8 +13,9 @@ from lib.alert import send_alert # Send Alert Msg for Stop Loss Hit and Target H
 # Basic configuration for logging
 logging.basicConfig(level=logging.INFO)
 
-filename = "log.json" # Buy Log File Name
-file_path = os.path.abspath(filename) # Get the absolute buy file path
+# filename = "log.json" # Buy Log File Name
+# file_path = os.path.abspath(filename) # Get the absolute buy file path
+file_path = 'log.json'
 print("Log File Path:", file_path)
 log_data = load_log_file(file_path) # Load Buy.JSON File
 
