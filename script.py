@@ -13,12 +13,8 @@ from lib.alert import send_alert # Send Alert Msg for Stop Loss Hit and Target H
 # Basic configuration for logging
 logging.basicConfig(level=logging.INFO)
 
-# filename = "log.json" # Buy Log File Name
-# file_path = os.path.abspath(filename) # Get the absolute buy file path
-file_path = 'log.json'
-print("Log File Path:", file_path)
-log_data = load_log_file(file_path) # Load Buy.JSON File
-print("Log Data:", log_data)
+file_path = 'log.json' # Log File Name
+log_data = load_log_file(file_path) # Load Log File
 
 # Crypto Watch list (12 Assets)
 watchlist = ["BTC/INR", "ETH/INR", "MATIC/INR", "XRP/INR", "ADA/INR", "BAT/INR", "BNB/INR", "SOL/INR", "NEAR/INR", "SAND/INR", "DOGE/INR", "STX/INR"]
