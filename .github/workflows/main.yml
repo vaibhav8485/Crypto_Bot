@@ -46,7 +46,8 @@ jobs:
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           echo "lib/__pycache__/" >> .gitignore
           git add log.json .gitignore
-          git commit -m "Dynamic Updating..."
+          COMMIT_MESSAGE="Update: $(date '+%Y-%m-%d %H:%M:%S')"
+          git commit -m "$COMMIT_MESSAGE"
           git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
           git push origin HEAD:master
         env:
