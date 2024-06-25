@@ -2,8 +2,8 @@
   "data": [
     {
       "symbol": "BTC/INR",
-      "buy_price": 0,
-      "status": "hold"
+      "buy_price": 5590833,
+      "status": "auto"
     },
     {
       "symbol": "ETH/INR",
@@ -12,8 +12,8 @@
     },
     {
       "symbol": "MATIC/INR",
-      "buy_price": 50.45,
-      "status": "auto"
+      "buy_price": 0,
+      "status": "manual"
     },
     {
       "symbol": "XRP/INR",
@@ -47,8 +47,8 @@
     },
     {
       "symbol": "SAND/INR",
-      "buy_price": 0,
-      "status": "hold"
+      "buy_price": 30.15,
+      "status": "auto"
     },
     {
       "symbol": "DOGE/INR",
