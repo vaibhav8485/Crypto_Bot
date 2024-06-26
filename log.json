@@ -17,8 +17,8 @@
     },
     {
       "symbol": "XRP/INR",
-      "buy_price": 43.7,
-      "status": "manual"
+      "buy_price": 43.45,
+      "status": "auto"
     },
     {
       "symbol": "ADA/INR",
