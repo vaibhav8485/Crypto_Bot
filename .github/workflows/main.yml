@@ -44,7 +44,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          echo "lib/__pycache__/" >> .gitignore
+          grep -qxF 'lib/__pycache__/' .gitignore || echo 'lib/__pycache__/' >> .gitignore
           git add log.json .gitignore
           COMMIT_MESSAGE="Update: $(date '+%Y-%m-%d %H:%M:%S')"
           git commit -m "$COMMIT_MESSAGE"
