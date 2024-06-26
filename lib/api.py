@@ -166,7 +166,6 @@ def buy_order(symbol):
 
         file_path = "log.json" # Log File Name
         log = load_log_file(file_path) # Load JSON File
-        print("Log Data Inside Buy Order:", log)
 
         if log:     
             # Update Buy Buy Log.JSON
