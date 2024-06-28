@@ -22,7 +22,7 @@
     },
     {
       "symbol": "ADA/INR",
-      "buy_price": 34.03,
+      "buy_price": 35.482,
       "status": "auto"
     },
     {
@@ -37,7 +37,7 @@
     },
     {
       "symbol": "SOL/INR",
-      "buy_price": 11636.74,
+      "buy_price": 13224.1,
       "status": "auto"
     },
     {
@@ -47,17 +47,17 @@
     },
     {
       "symbol": "SAND/INR",
-      "buy_price": 30.15,
+      "buy_price": 31.25,
       "status": "auto"
     },
     {
       "symbol": "DOGE/INR",
-      "buy_price": 10.74,
+      "buy_price": 11.4134,
       "status": "auto"
     },
     {
       "symbol": "STX/INR",
-      "buy_price": 142.94,
+      "buy_price": 159.16,
       "status": "auto"
     }
   ]
