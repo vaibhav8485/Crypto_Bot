@@ -63,7 +63,8 @@ def RISK_MANAGEMENT():
             buy_price = data['buy_price'] # Get Purchasing Price of Crypto
             crypto_exists = find_coin(symbol)  # Check the coin exists in portfolio or not
             stop_loss_price = get_stop_loss(buy_price, 20) # Calculate Stop Loss Price (Note: 10%)
-            target_price = get_target(buy_price, 50) # Calculate Target Price (Note: 20%)
+            target_price_2 = get_target(buy_price, 50) # Calculate Long Term Target Price (Note: 20%)
+            target_price_1 = get_target(buy_price, 5) # Calculate Short Term Target Price (Note: 5%)
 
             # For Stop Loss Hit
             if current_price <= stop_loss_price and crypto_exists == True:
@@ -71,8 +72,12 @@ def RISK_MANAGEMENT():
                 update_log_file(file_path, symbol, 0, 'manual') # Update Log Status
                 send_alert(f'Stop Loss Hit! Buy Back Manually Activated for {symbol}') # Send Alert
                 logging.info(f"Stop Loss Hit for {symbol}") # Console Msg
+            # For Dynamic Stop Loss
+            elif current_price == target_price_1 and crypto_exists == True:
+                update_log_file(file_path, symbol, current_price, 'auto') # Update Log Buy Price for Dynamic Stop Loss
+                logging.info(f'Dynamic Stop Loss Set')    
             # For Target Hit
-            elif current_price >= target_price and crypto_exists == True:
+            elif current_price >= target_price_2 and crypto_exists == True:
                 update_log_file(file_path, symbol, buy_price, 'hold') # Update Log Status
                 send_alert(f'Target Hit! Sell Manually Activated for {symbol}') # Send Alert
                 logging.info(f'Target Hit for {symbol}') # Console Msg
