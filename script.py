@@ -62,10 +62,9 @@ def RISK_MANAGEMENT():
             current_price = ticker(symbol) # Get Current Price of Crypto
             buy_price = data['buy_price'] # Get Purchasing Price of Crypto
             crypto_exists = find_coin(symbol)  # Check the coin exists in portfolio or not
-            stop_loss_price = get_stop_loss(buy_price, 20) # Calculate Stop Loss Price (Note: 10%)
-            target_price_2 = get_target(buy_price, 50) # Calculate Long Term Target Price (Note: 20%)
-            target_price_1 = get_target(buy_price, 5) # Calculate Short Term Target Price (Note: 5%)
-        
+            stop_loss_price = get_stop_loss(buy_price, 10) # Calculate Stop Loss Price (Note: 10%)
+            target_price_2 = get_target(buy_price, 50) # Calculate Long Term Target Price (Note: 50%)
+            target_price_1 = get_target(buy_price, 15) # Calculate Short Term Target Price (Note: 15%)
             # For Stop Loss Hit
             if current_price <= stop_loss_price and crypto_exists == True:
                 sell_order(symbol) # Place Sell Order
@@ -75,7 +74,7 @@ def RISK_MANAGEMENT():
             # For Dynamic Stop Loss
             elif current_price >= target_price_1 and crypto_exists == True:
                 update_log_file(file_path, symbol, current_price, 'auto') # Update Log Buy Price for Dynamic Stop Loss
-                logging.info(f'Dynamic Stop Loss Set')    
+                logging.info(f'Dynamic Stop Loss Set for {symbol}')    
             # For Target Hit
             elif current_price >= target_price_2 and crypto_exists == True:
                 update_log_file(file_path, symbol, buy_price, 'hold') # Update Log Status
@@ -87,5 +86,5 @@ def RISK_MANAGEMENT():
 
 # Execution Start form this
 if __name__ == "__main__":
-    RISK_MANAGEMENT() # Calling Risk Management Function 
+    RISK_MANAGEMENT() # Calling Risk Management Function
     CRYPTO_BOT() # Calling Main Function
