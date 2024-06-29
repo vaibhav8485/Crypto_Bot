@@ -75,7 +75,7 @@ def RISK_MANAGEMENT():
             # For Dynamic Stop Loss
             elif current_price >= target_price_1 and crypto_exists == True:
                 update_log_file(file_path, symbol, current_price, 'auto') # Update Log Buy Price for Dynamic Stop Loss
-                logging.info(f'Dynamic Stop Loss Set')    
+                logging.info(f'Dynamic Stop Loss Set for {symbol}')    
             # For Target Hit
             elif current_price >= target_price_2 and crypto_exists == True:
                 update_log_file(file_path, symbol, buy_price, 'hold') # Update Log Status
