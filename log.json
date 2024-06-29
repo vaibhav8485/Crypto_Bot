@@ -27,8 +27,8 @@
     },
     {
       "symbol": "BAT/INR",
-      "buy_price": 17.24,
-      "status": "auto"
+      "buy_price": 0,
+      "status": "manual"
     },
     {
       "symbol": "BNB/INR",
